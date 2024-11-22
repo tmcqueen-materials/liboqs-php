@@ -1,3 +1,4 @@
+#!/bin/bash
 # Remove old build files and make new build directory
 rm -rf build
 mkdir -p build
