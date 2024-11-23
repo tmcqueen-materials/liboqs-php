@@ -8,7 +8,10 @@ script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 if [[ -e "$LIBOQS_ROOT" ]] || [[ -e "$script_dir/liboqs" ]]; then
     echo "liboqs directory already exists, skipping cloning"; \
 else \
-    git clone -b main https://github.com/open-quantum-safe/liboqs.git; \
+    git clone https://github.com/open-quantum-safe/liboqs.git; \
+    cd liboqs; \
+    git checkout 0.11.0; \
+    cd ..; \
     export LIBOQS_ROOT=$(pwd)/liboqs; \
 fi
 
