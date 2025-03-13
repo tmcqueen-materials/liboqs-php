@@ -10,7 +10,9 @@ if [[ -e "$LIBOQS_ROOT" ]] || [[ -e "$script_dir/liboqs" ]]; then
 else \
     git clone https://github.com/open-quantum-safe/liboqs.git; \
     cd liboqs; \
-    git checkout 0.11.0; \
+    git checkout 0.12.0; \
+    curl https://raw.githubusercontent.com/tmcqueen-materials/kafkacrypto/refs/heads/master/liboqs-sphincs+-slhdsa.patch > liboqs-sphincs+-slhdsa.patch; \
+    patch -p1 < liboqs-sphincs+-slhdsa.patch; \
     cd ..; \
     export LIBOQS_ROOT=$(pwd)/liboqs; \
 fi
@@ -19,7 +21,7 @@ if [[ -e "$LIBOQS_ROOT/build/lib/liboqs.a" ]]; then
     echo "liboqs library already builded, skipping compilation"; \
 else \
     rm -rf $LIBOQS_ROOT/build; \
-    cmake -GNinja -B $LIBOQS_ROOT/build $LIBOQS_ROOT && ninja -j $(nproc) -C $LIBOQS_ROOT/build; \
+    cmake -GNinja -B $LIBOQS_ROOT/build $LIBOQS_ROOT -DOQS_ENABLE_KEM_ML_KEM=ON -DOQS_ENABLE_KEM_ntruprime_sntrup761=ON -DOQS_ENABLE_SIG_SPHINCS=ON && ninja -j $(nproc) -C $LIBOQS_ROOT/build; \
 fi
 
 # Compile the C++ wrapper
