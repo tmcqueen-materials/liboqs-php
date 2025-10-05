@@ -21,7 +21,7 @@ if [[ -e "$LIBOQS_ROOT/build/lib/liboqs.a" ]]; then
     echo "liboqs library already builded, skipping compilation"; \
 else \
     rm -rf $LIBOQS_ROOT/build; \
-    cmake -GNinja -B $LIBOQS_ROOT/build $LIBOQS_ROOT -DOQS_MINIMAL_BUILD="KEM_ntruprime_sntrup761;SIG_sphincs_shake256_128f_simple;KEM_ml_kem_1024;SIG_slh_dsa_pure_shake_128f" && ninja -j $(nproc) -C $LIBOQS_ROOT/build; \
+    cmake -GNinja -B $LIBOQS_ROOT/build $LIBOQS_ROOT -DOQS_MINIMAL_BUILD="KEM_ntruprime_sntrup761;SIG_sphincs_shake_128f_simple;KEM_ml_kem_1024;SIG_slh_dsa_pure_shake_128f" && ninja -j $(nproc) -C $LIBOQS_ROOT/build; \
 fi
 
 # Compile the C++ wrapper
