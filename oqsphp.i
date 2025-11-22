@@ -54,7 +54,7 @@ private:
     try {
         $action
     } catch (CustomException& e) {
-        zend_throw_exception(zend_exception_get_default(), e.what(), 0);
+        zend_throw_exception(zend_ce_exception, e.what(), 0);
     }
 }
 // -------------------------------------------------------------------
