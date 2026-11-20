@@ -22,6 +22,27 @@
  * SOFTWARE.
  */
 
+// PHP 8.6 compatibility
+%begin %{
+#include <stddef.h>
+
+#ifndef XtOffsetOf
+#define XtOffsetOf(s_type, field) offsetof(s_type, field)
+#endif
+
+#ifndef WRONG_PARAM_COUNT
+#define WRONG_PARAM_COUNT { zend_wrong_param_count(); RETURN_THROWS(); }
+#endif
+
+#ifndef zval_is_true
+#define zval_is_true(z) zend_is_true(z)
+#endif
+
+#ifndef ZEND_RESULT_CODE
+#define ZEND_RESULT_CODE zend_result
+#endif
+%}
+
 %module(directors="1") oqsphp
 %{
 #include "oqs/oqs.h"
